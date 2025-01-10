@@ -1,70 +1,65 @@
+import React, { Component } from "react";
 
-// interface equipeProps {
-//   name: string,
-//   cargo: string,
-//   age: string
-// }
-
-
-interface SocialMediaProps {
-  Youtube?: string
-  TikTok?: string
-  Instagram?: string
-  Linkedin?: string
+interface socialProps {
+  instagram?: string
+  Tiktok?: string
 }
-interface AboutProps extends SocialMediaProps {
-  name: string
+interface EquipeProps extends socialProps{
+  nome: string
   cargo: string
-  age: string
+  idade: string
 }
 
-const SocialMedia = (props: SocialMediaProps) => {
-  return (
-    <div>
-      <a href={props.Youtube}>Youtube</a>
-      <hr />
-      <a>Tiktok {props.TikTok}</a>
-      <hr />
-      <a>Instagram {props.Instagram}</a>
-      <hr />
-      <a>Linkedin {props.Linkedin}</a>
-    </div>
-  )
-}
 
-const About = (props: AboutProps) => {
-  return (
-    <div>
-      <h2>Meu nome é: {props.name}</h2>
-      <h2>Tenho: {props.age} Anos</h2>
-      <h2>Cargo: {props.cargo}</h2>
-      <SocialMedia 
-      Youtube={props.Youtube}
-      Instagram={props.Instagram}
-      Linkedin={props.Linkedin}
-      TikTok={props.TikTok}
+
+class Equipe extends Component <EquipeProps> {
+  render(): React.ReactNode {
+    return (
+      <div>
+      <Sobre 
+      nome={this.props.nome}
+      cargo={this.props.cargo}
+      idade={this.props.idade}
       />
-      <hr></hr>
-    </div>
-  )
+      <Social 
+      instagram={this.props.instagram}
+      Tiktok={this.props.Tiktok}
+      />
+      </div>
+    )
+  }
 }
 
-const Equipe = () => {
-  return (
+class Sobre extends Component <EquipeProps>{
+  render(): React.ReactNode {
+    return (
+      <div>
+      <h2>Olá sou o(a): {this.props.nome}</h2>
+      <h3>Profissão: {this.props.cargo} </h3>
+      <h3>idade: {this.props.idade} anos </h3>
+      </div>
+    )
+  }
+}
+
+const Social = (props: socialProps): JSX.Element => {
+  return(
     <div>
-    <About name="Adriano" age="19" cargo="desenvolvedor" Youtube="https://google.com" />
-    <SocialMedia />
-    <About name="Hilary" age="17" cargo="Psicologa"  Instagram="https://Hilary" />
-    <About name="Erick" age="20" cargo="Empreendedor" Instagram="https://Erick" />
+      <h3><a href="https://instagram.com.br">Instagram {props.instagram}</a></h3>
+      <h3><a href="https://www.tiktok.com/pt-BR/">Tik Tok {props.Tiktok}</a></h3>
+      <hr />
     </div>
   )
 }
 
-export default function App(){
+function App(){
   return(
     <div>
       <h1>Conheça nossa equipe:</h1>
-      <Equipe />
+      <Equipe nome="Adriano" cargo="Desenvolvedor" idade="24" />
+      <Equipe nome="Hilary" cargo="Psicologa" idade="17" />
     </div>
   )
 };
+
+export default App;
