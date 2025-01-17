@@ -1,50 +1,29 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import image from "./components/images/pexels-padrinan-806421.jpg"
+import "./components/styles/style.css"
 
-interface AppProps {
-  email: string
-  senha: string
-}
+const App = () => {
+  const [frase, setFrase] = useState("");
+  
+  const frases = [
+    "“A perfeição não é alcançada quando já não há mais nada para adicionar, mas quando já não há mais nada que se retirar.” — Antoine de Saint-Exupéry",
+    "Sempre escolha uma pessoa preguiçosa para realizar uma tarefa difícil. Ela sempre irá achar a maneira mais simples de se fazer.” — Bill Gates",
+    "Menos é mais. Ser simples requer tempo e esforço.” — Jeff Bullas",
+    "Se existe uma forma de fazer melhor, descubra-a.” — Thomas Edison"
+  ]
 
-interface AppState extends AppProps {
-  email: string
-  senha: string
-}
-
-class App extends Component<AppState, AppProps>
-{
-
-  constructor(props: AppProps){
-    super(props)
-    this.state = {
-      email: 'teste@teste.com',
-      senha: '',
-    }
-    this.TrocaEmail = this.TrocaEmail.bind(this)
-   }
-   TrocaEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({email: event.target.value});
+  const quebraBiscoito = () => {
+    const randomIndex = Math.floor(Math.random() * frases.length);
+    setFrase(frases[randomIndex])
   }
 
-  render(): React.ReactNode {
-    return (
-      <main>
-        <h1>Login</h1>
-        Email:
-        <input
-        type="email"
-         name="email" 
-         id="" 
-         value={this.state.email}
-        onChange={this.TrocaEmail}/> <br />
-        Senha:
-        <input 
-        type="password"
-         name="password" 
-         id="" 
-         value={this.state.senha}/>
-      </main>
-    )
-  }
+  return(
+    <main className="container">
+      <img className="img" src={image}/>
+      <button onClick={quebraBiscoito}>Abrir Biscoito!</button>
+      <h3 className="fraseText">{frase}</h3>
+    </main>
+  )
 }
 
 export default App
